@@ -21,7 +21,7 @@ serverSocket.listen(1)
 connection, addr = serverSocket.accept()
 
 while True:
-
+    
     user_guess = int(connection.recv(1024).decode())
     print("The user guessed",user_guess)
 
