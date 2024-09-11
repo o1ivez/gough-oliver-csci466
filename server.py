@@ -1,4 +1,4 @@
-# Oliver Gough CSCI 466 program 1 server battleship
+# Oliver Gough CSCI 466 program 1 server battleship 9/11/2024
 
 import socket
 import random

@@ -1,4 +1,4 @@
-# Oliver Gough CSCI 466 program 1 client battleship
+# Oliver Gough CSCI 466 program 1 client battleship 9/11/2024
 
 import socket
 
@@ -11,6 +11,7 @@ clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 clientSocket.connect( (host,port) )
 
 #initalize variables to use
+numOfGuesses = 0
 sunkAllShips = False
 hitCounter = 0
 hitMissMap = [["?","?","?","?","?","?"],["?","?","?","?","?","?"],["?","?","?","?","?","?"],["?","?","?","?","?","?"],["?","?","?","?","?","?"],["?","?","?","?","?","?"],]
@@ -32,7 +33,6 @@ while(not sunkAllShips):
     print(response)
     userGuessRow =  int(userGuessRow) -1
     userGuessColumn = int(userGuessColumn) -1
-    numOfGuesses = 0
 
 #update the map accodingly and looks for win condtion, ie place an x nine time bc 4+3+2 = 9 
     if(response == "HIT"):
@@ -51,5 +51,5 @@ while(not sunkAllShips):
         for i in hitMissMap:
             print(i)
         print("Game over!")
-        print("It took you " + numOfGuesses + " guesses")
+        print("It took you " + str(numOfGuesses) + " guesses")
         sunkAllShips = True
