@@ -2,9 +2,10 @@
 
 import socket
 import random
+import sys
 
 #server setup
-port = 9000
+port = int(sys.argv[1])
 host = socket.gethostname()
 
 #bind socket

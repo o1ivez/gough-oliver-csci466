@@ -1,9 +1,10 @@
 # Oliver Gough CSCI 466 program 1 client battleship 9/11/2024
 
 import socket
+import sys
 
 #server setup
-port = 9000
+port = int(sys.argv[1])
 host = socket.gethostname()
 
 #bind socket
