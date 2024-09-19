@@ -89,15 +89,17 @@ if random_num3ship == 2:
 serverSocket.listen(1)
 connection, addr = serverSocket.accept()
 
-#this splits the string for all possible guesses 1-6, did not account for error on the user end in this program
-nums = 123456
-
 #while running loop that checks if the map for hits and misses, and sends response back
 while True:
     userGuess = int(connection.recv(1024).decode())
-    userGuess = list(str(userGuess))
-    if(battleShipMap[int(userGuess[0])-1][int(userGuess[1])-1] == 1):
-        connection.send("HIT".encode())
+    if(userGuess == 77):
+        for i in battleShipMap:
+            print(i)
+        print("Game Over!")
+        break
     else:
-        connection.send("MISS".encode())
-    
+        userGuess = list(str(userGuess))
+        if(battleShipMap[int(userGuess[0])-1][int(userGuess[1])-1] == 1):
+            connection.send("HIT".encode())
+        else:
+            connection.send("MISS".encode())

@@ -53,4 +53,5 @@ while(not sunkAllShips):
             print(i)
         print("Game over!")
         print("It took you " + str(numOfGuesses) + " guesses")
+        clientSocket.send(("77").encode())
         sunkAllShips = True
