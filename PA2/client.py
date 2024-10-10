@@ -96,8 +96,6 @@ while(packetNum < len(message)):
             print("\nCurrupted ACK recieved, retransmitting")
     packetNum = packetNum +1
 
-#TODO this shit get translated file
-
 #rebind socket
 clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 clientSocket.connect( (host,port+1) )
@@ -115,7 +113,7 @@ while (recieved == False):
         clientSocket.send(pickle.dumps(ack)) #send ack
         if(ack.getChecksum() == True):
             fullMessage = fullMessage + currentPacket.getMessage()
-            if (fullMessage[len(fullMessage)- 1] == ("." or "?" or "!")): #checks last letter
+            if (fullMessage[len(fullMessage)- 1] == (".") or ("?") or ("!")): #checks last letter
                 recieved = True #breaks out of loop
 print("\nTranslated message: \n" + str(fullMessage))
 print()
