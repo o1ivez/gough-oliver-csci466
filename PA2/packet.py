@@ -21,3 +21,4 @@ class Packet:
     
     def getLength(self):
         return len(self.message)
+    
