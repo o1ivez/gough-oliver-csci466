@@ -153,7 +153,7 @@ while(packetNum < len(translatedMessage)):
         currentMessage = createMessage(translatedMessage[packetNum], packetNum, curruption_probability)
         printSendingPacket(currentMessage)
         connection.send(pickle.dumps(currentMessage)) #send packet
-        time.sleep(1)
+        time.sleep(3)
         recievePacket = pickle.loads(connection.recv(1024)) #need to unpickle and make it into packet object
         if((recievePacket.getAckOrNak() == 1)and(recievePacket.getChecksum() == True)): #checks if ACK and if not currupted 
             print("\nValid ACK recieved, moving on")
@@ -162,4 +162,5 @@ while(packetNum < len(translatedMessage)):
             print("\nNAK recieved, retransmitting")
         elif(recievePacket.getChecksum() == False):
             print("\nCurrupted ACK recieved, retransmitting")
-    packetNum = packetNum +1
+    packetNum = packetNum + 1
+print("\nFile sent! End of server program.\n")
