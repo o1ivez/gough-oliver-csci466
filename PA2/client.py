@@ -85,7 +85,7 @@ while(packetNum < len(message)):
         currentMessage = createMessage(message[packetNum], packetNum, curruption_probability)
         printSendingPacket(currentMessage)
         clientSocket.send(pickle.dumps(currentMessage)) #send packet
-        time.sleep(1)
+        time.sleep(3)
         recievePacket = pickle.loads(clientSocket.recv(1024)) #need to unpickle and make it into packet object
         if((recievePacket.getAckOrNak() == 1)and(recievePacket.getChecksum() == True)): #checks if ACK and if not currupted 
             print("\nValid ACK recieved, moving on")
@@ -117,5 +117,5 @@ while (recieved == False):
             fullMessage = fullMessage + currentPacket.getMessage()
             if (fullMessage[len(fullMessage)- 1] == ("." or "?" or "!")): #checks last letter
                 recieved = True #breaks out of loop
-
-print("Full translated message: " + str(fullMessage))
+print("\nTranslated message: \n" + str(fullMessage))
+print()
