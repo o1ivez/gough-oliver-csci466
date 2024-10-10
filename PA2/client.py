@@ -113,7 +113,7 @@ while (recieved == False):
         clientSocket.send(pickle.dumps(ack)) #send ack
         if(ack.getChecksum() == True):
             fullMessage = fullMessage + currentPacket.getMessage()
-            if (fullMessage[len(fullMessage)- 1] == (".") or ("?") or ("!")): #checks last letter
+            if ((fullMessage[len(fullMessage)- 1] == '.') or (fullMessage[len(fullMessage)- 1] == '?') or (fullMessage[len(fullMessage)- 1] == '!')): #checks last letter
                 recieved = True #breaks out of loop
 print("\nTranslated message: \n" + str(fullMessage))
 print()
