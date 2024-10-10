@@ -37,14 +37,20 @@ def printReceivedPacket(currentPacket):
     print("Length: " + str(currentPacket.getLength()))
     return
 
-#makes a list of the translated message and compares each letter to the capitalziation of input then joins list to string
+#makes a list of the translated message and compares each letter to the capitalziation of input then joins list to string works ok
 def perserveCapitalization(fullMessage, translatedMessage):
     x = 0
     t = list(translatedMessage)
-    for i in fullMessage:
-        if(i.upper() == i):
-            t[x] = t[x].upper()
-        x = x+1
+    if(len(translatedMessage) < len(fullMessage)):
+        for i in translatedMessage:
+            if(fullMessage[x].upper() == fullMessage[x]):
+                t[x] = t[x].upper()
+            x = x+1
+    else:
+        for i in fullMessage:
+            if(i.upper() == i):
+                t[x] = t[x].upper()
+            x = x+1
     return "".join(t)
 
 #prints out contents of current packet
@@ -85,9 +91,16 @@ connection, addr = serverSocket.accept()
 #read in csv file of priate translations and creates a hash map
 file = open('pirate.csv','r')
 translationDict = {}
+x = 0
 for i in file:
-    splitLine = i.strip().split(",")
-    translationDict.update({splitLine[0]:splitLine[1]})
+    if (x == 0):
+        splitLine = i.strip().split(",")
+        i =  splitLine[0]
+        translationDict.update({i[3:]:splitLine[1]})
+    else:
+        splitLine = i.strip().split(",")
+        translationDict.update({splitLine[0]:splitLine[1]})
+    x = x+1
 
 fullMessage = ""
 recieved = False
@@ -107,9 +120,10 @@ while (recieved == False):
                 recieved = True #breaks out of loop
 
 #translates message by checking if in hashmap then removes the space and adds back the punctuatuion
-print("Translating\nMessage recieved from client: " + "".join(fullMessage))
+print("\nTranslating\nMessage recieved from client: " + "".join(fullMessage))
 print("\n")
 print(translationDict)
+print("\n")
 translatedMessage = ""
 i = 0
 messageToTranslate = fullMessage[:-1]
@@ -124,6 +138,30 @@ translatedMessage = translatedMessage[1:] + fullMessage[len(fullMessage) -1] #fu
 translatedMessage = perserveCapitalization(fullMessage, translatedMessage) #fixes capitalization
 print("Translated message to send: " + translatedMessage)
 
-#TODO this shit send translated file 
+#rebind socket
+serverSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+serverSocket.bind( (host, port+1) )
+serverSocket.listen(1)
+connection, addr = serverSocket.accept()
+
+#send translated packets
+translatedMessage = [(translatedMessage[i:i+maxSegmentSize]) for i in range(0, len(translatedMessage), maxSegmentSize)]
+packetNum = 0
+while(packetNum < len(translatedMessage)):
+    currptionFlag = False
+    while(currptionFlag == False): #1st packet and if packet revieived is a nak
+        currentMessage = createMessage(translatedMessage[packetNum], packetNum, curruption_probability)
+        printSendingPacket(currentMessage)
+        connection.send(pickle.dumps(currentMessage)) #send packet
+        time.sleep(1)
+        recievePacket = pickle.loads(connection.recv(1024)) #need to unpickle and make it into packet object
+        if((recievePacket.getAckOrNak() == 1)and(recievePacket.getChecksum() == True)): #checks if ACK and if not currupted 
+            print("\nValid ACK recieved, moving on")
+            currptionFlag = True
+        elif(recievePacket.getAckOrNak() == 2):
+            print("\nNAK recieved, retransmitting")
+        elif(recievePacket.getChecksum() == False):
+            print("\nCurrupted ACK recieved, retransmitting")
+    packetNum = packetNum +1
 
 print("All packets sent, end of server program")

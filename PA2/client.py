@@ -98,4 +98,24 @@ while(packetNum < len(message)):
 
 #TODO this shit get translated file
 
-print("Full translated message: " )
+#rebind socket
+clientSocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+clientSocket.connect( (host,port+1) )
+
+#recieve translated sentence
+fullMessage = ""
+recieved = False
+while (recieved == False):
+    currentPacket = pickle.loads(clientSocket.recv(1024))
+    printReceivedPacket(currentPacket)
+    if currentPacket.getChecksum() == False: #currupted message 
+        clientSocket.send(pickle.dumps(createNAK())) #send nak
+    else:#good data
+        ack = createACK(curruption_probability)
+        clientSocket.send(pickle.dumps(ack)) #send ack
+        if(ack.getChecksum() == True):
+            fullMessage = fullMessage + currentPacket.getMessage()
+            if (fullMessage[len(fullMessage)- 1] == ("." or "?" or "!")): #checks last letter
+                recieved = True #breaks out of loop
+
+print("Full translated message: " + str(fullMessage))
