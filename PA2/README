@@ -6,6 +6,6 @@ https://youtu.be/I9UeFtHcgR8
 How to run:
 This is a program created to demonstrate socket communication for CSCI 466 and to demo TCP protocol, in order use the program
 launch the server program first and then the client program. In order for the program to funtion properly you must end every sentence 
-with either a ".", "!", or "?" or else the program will crash as the program will not detect the end of the message. The program terminates
-after sending back the translated message.
-
+with either a ".", "!", or "?" or else the program will crash as the program will not detect the end of the message. You must also start
+the program from the command line with the format: python server.py [PORT_NUMBER] [MAXIMUM_SEGMENT_SIZE] [PACKET_CORRUPT_PROBABILITY]. 
+The program terminates after sending back the translated message.
