@@ -4,7 +4,7 @@ Link to video demo:
 https://youtu.be/I9UeFtHcgR8
 
 How to run:
-This is a program created to demonstrate socket communication for CSCI 466 and to demo TCP protocol, in order to use the file please
+This is a program created to demonstrate socket communication for CSCI 466 and to demo TCP protocol, in order use the program
 launch the server program first and then the client program. In order for the program to funtion properly you must end every sentence 
 with either a ".", "!", or "?" or else the program will crash as the program will not detect the end of the message. The program terminates
 after sending back the translated message.
