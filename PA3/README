@@ -1,1 +1,10 @@
+Oliver Gough PA2
+
+Link to video demo:
 https://youtu.be/9X-Y3BckkEw
+
+How to run:
+This is a program created to demonstrate socket communication for CSCI 466 and to demo the token-passing protocol. To run the program you must input 
+"python /node.py [SENDING_PORT_NUM] [RECIEVE_PORT_NUM] [NUM_OF_PACKETS] [IS_HEAD_FLAG] [NODE_NUM]" into the command line. This program passes a token 
+around, when a node has the token it reduces the number of packets in its queue by 1 and sends the token, each time it sends the token, there is a 25% 
+chance a new packet will be added to its queue. The program has no endpoint and will continue to run until closed. 
