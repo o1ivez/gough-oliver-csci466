@@ -40,13 +40,12 @@ if(isHead == 1):
         print("I have nothing to send... sending token to next person")
         sendSocket.sendto("".encode(), send)
         numOfPacketsInQueue = int(numOfPacketsInQueue) + addToHostBuffer()
-    
     #if buffer is not empty reduce num by 1, send, and maybe add 1
     else:
         print("Sending packet out to internet...")
         numOfPacketsInQueue = numOfPacketsInQueue - 1
         print("Current queue size of Node #" + nodeNum + ": " + str(numOfPacketsInQueue))
-        sendSocket.sendto("Token".encode(), send)
+        sendSocket.sendto("".encode(), send)
         numOfPacketsInQueue = int(numOfPacketsInQueue) + addToHostBuffer()
 
 else:
@@ -69,7 +68,7 @@ while(True):
         print("Sending packet out to internet...")
         numOfPacketsInQueue = numOfPacketsInQueue - 1
         print("Current queue size of Node #" + nodeNum + ": " + str(numOfPacketsInQueue))
-        sendSocket.sendto("Token".encode(), send)
+        sendSocket.sendto("".encode(), send)
         numOfPacketsInQueue = int(numOfPacketsInQueue) + addToHostBuffer()
 
     print("Sending token to next node...\n")
