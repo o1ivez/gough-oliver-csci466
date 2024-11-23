@@ -1,1 +1,8 @@
+Oliver Gough PA4
+
+Link to video demo:
 https://youtu.be/QyxQuNLvZ64
+
+How to run:
+This is a program created to demonstrate symetric key cryptography and hashing in order to verify the integrity of a message. To run the program
+you must first run the server.py file then the client.py file. It does not require any command line arguments and the program will run infdefinitly.
