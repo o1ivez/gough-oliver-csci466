@@ -2,7 +2,7 @@ from flask import Flask,request
 import random
 import datetime
 
-#read in funfacts csv
+#read in funfacts txt
 facts = []
 f = open('facts.csv','r', encoding='utf-8')
 for i in f:
@@ -24,7 +24,6 @@ def fact():
         printStr = str(randChoice) + "\n\n" + printStr
         tempFact.remove(str(randChoice))
         j = j + 1
-        print("hI")
     return "\n" + printStr
 
 @app.route('/info')
