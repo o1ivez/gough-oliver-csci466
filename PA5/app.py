@@ -9,7 +9,7 @@ for i in f:
     i = i.replace("\n", "")
     i = i.replace('"', "")
     facts.append(i)
-
+f.close()
 #flask
 app = Flask(__name__)
 
