@@ -1,9 +1,11 @@
+
 from flask import Flask,request
 import random
 import datetime
 
 #read in funfacts txt
 facts = []
+addBack = []
 f = open('facts.csv','r', encoding='utf-8')
 for i in f:
     i = i.replace("\n", "")
@@ -23,6 +25,13 @@ def fact():
         randChoice = random.choice(tempFact)
         printStr = str(randChoice) + "\n\n" + printStr
         tempFact.remove(str(randChoice))
+        addBack.append(str(randChoice))
+        j = j + 1
+    j= 0
+    while (j < i):
+        randChoice = random.choice(addBack)
+        facts.append(randChoice)
+        addBack.remove(str(randChoice))
         j = j + 1
     return "\n" + printStr
 
