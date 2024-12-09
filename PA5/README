@@ -1,8 +1,7 @@
 Oliver Gough PA5
 
 Link to video demo:
-https://youtu.be/QyxQuNLvZ64 #FIX THIS
-
+https://youtu.be/Q-VLGNk4MsA
 How to run:
 This progam was created to demonstrate cloud hosting and the flask framework. This program has two endpoitns '/fact' and '/info'. '/fact' requires a header called Amount with value 1-10 and it will 
 return a number of facts correspoinding to the number provided. '/info' will return the time, the user agent that issued the request, and the HTTP transmission type. You can run this program through either 
