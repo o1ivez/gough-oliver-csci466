@@ -1,6 +1,6 @@
 import requests
 
-url = "http://3.145.36.234/fact"
+url = "http://18.221.248.193/fact"
 
 #test the facts
 headers = {
@@ -10,6 +10,6 @@ response = requests.get(url, headers=headers)
 print(response.text)
 
 #test the info
-url = "http://3.145.36.234/info"
+url = "http://18.221.248.193/info"
 response = requests.get(url)
 print(response.text)
